@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
+
+class ATank;
 
 /**
  * 
@@ -22,9 +23,11 @@ private:
 
 	// Engine Methods
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	// Custom Methods
 	ATank* GetControlledTank();
 	ATank* GetPlayerTank();
+	void AimAtPlayer();
 	
 };

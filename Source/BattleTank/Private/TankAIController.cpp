@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "TankAIController.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
-#include "TankAIController.h"
+#include "Tank.h"
 
 
 void ATankAIController::BeginPlay()
 {
+	Super::BeginPlay();
 	ControlledTank = GetControlledTank();
 	if (ControlledTank)
 	{
@@ -19,6 +20,12 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("TankAIController has found Player Tank: %s"), *PlayerTank->GetName());
 	}
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimAtPlayer();
 }
 
 ATank* ATankAIController::GetControlledTank()
@@ -44,4 +51,14 @@ ATank* ATankAIController::GetPlayerTank()
 	}
 
 	return PlayerTank;
+}
+
+void ATankAIController::AimAtPlayer()
+{
+	if (!PlayerTank || !ControlledTank)
+	{
+		return;
+	}
+
+	ControlledTank->AimAt(PlayerTank->GetActorLocation());
 }
