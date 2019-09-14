@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankTrack.h"
 
 // Sets default values
 ATank::ATank()
@@ -42,6 +43,24 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 void ATank::SetTurretReference(UTankTurret* TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+void ATank::SetLeftTrackReference(UTankTrack* TrackToSet)
+{
+	LeftTrack = TrackToSet;
+	if (!LeftTrack)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Tank could not set Left Track reference!"));
+	}
+}
+
+void ATank::SetRightTrackReference(UTankTrack* TrackToSet)
+{
+	RightTrack = TrackToSet;
+	if (!RightTrack)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Tank could not set Right Track reference!"));
+	}
 }
 
 void ATank::Fire()
