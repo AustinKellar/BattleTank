@@ -26,6 +26,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimAtPlayer();
+	ControlledTank->Fire();
 }
 
 ATank* ATankAIController::GetControlledTank()
