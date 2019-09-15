@@ -27,6 +27,8 @@ void ATankAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	AimAtPlayer();
 	ControlledTank->Fire();
+	ATank* Player = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	MoveToActor(Player, AcceptanceRadius);
 }
 
 ATank* ATankAIController::GetControlledTank()
