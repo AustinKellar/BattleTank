@@ -20,6 +20,7 @@ private:
 	// Fields
 	ATank* ControlledTank;
 	ATank* PlayerTank;
+	float AcceptanceRadius = 3000;
 
 	// Engine Methods
 	virtual void BeginPlay() override;
@@ -29,5 +30,5 @@ private:
 	ATank* GetControlledTank();
 	ATank* GetPlayerTank();
 	void AimAtPlayer();
-	float AcceptanceRadius = 3000;
+	void MoveTowardsPlayer();
 };
