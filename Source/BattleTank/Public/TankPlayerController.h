@@ -16,6 +16,11 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+protected:
+	// Blueprint Callable Functions
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
+
 private:
 	// UPROPERTIES
 	UPROPERTY(EditDefaultsOnly)
@@ -30,13 +35,11 @@ private:
 	// Fields
 	ATank* ControlledTank;
 
-
 	// Engine Methods
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	// Custom Methods
-	ATank* GetControlledTank() const;
 	void AimTowardsCrosshair();
 	bool GetCrossHairRayHitLocation(FVector& OutHitLocation) const; // returns true if hits terrain
 	bool GetLookDirectionHitLocation(const FVector& LookDirection, FVector& OutHitLocation) const;
