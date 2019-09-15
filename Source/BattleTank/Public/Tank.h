@@ -9,7 +9,6 @@
 class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
-class UTankTrack;
 class AProjectile;
 
 UCLASS()
@@ -26,12 +25,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetLeftTrackReference(UTankTrack* TrackToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetRightTrackReference(UTankTrack* TrackToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
@@ -57,8 +50,6 @@ private:
 	// Fields
 	double LastFireTime = 0.0f;
 	UTankBarrel* Barrel = nullptr;
-	UTankTrack* LeftTrack = nullptr;
-	UTankTrack* RightTrack = nullptr;
 
 	// Engine Methods
 	ATank();
