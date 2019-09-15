@@ -20,12 +20,6 @@ public:
 	// Fields
 
 	// Blueprint Callable Methods
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetTurretReference(UTankTurret* TurretToSet);
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
@@ -54,8 +48,6 @@ private:
 
 	// Engine Methods
 	ATank();
-	virtual void BeginPlay() override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Custom Methods
 };

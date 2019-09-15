@@ -26,32 +26,15 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
 	Barrel = BarrelToSet;
-	if (!Barrel)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Could not set Barrel Reference!"));
-	}
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
 	Turret = TurretToSet;
-	if (!Turret)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Could not set Turret Reference!"));
-	}
 }
 
 void UTankAimingComponent::AimAt(const FVector& Location, float LaunchSpeed)
 {
-	if (!Barrel)
-	{
-		return;
-	}
-
-	if (!Turret)
+	if (!ensure(Barrel && Turret))
 	{
 		return;
 	}
@@ -67,6 +50,11 @@ void UTankAimingComponent::AimAt(const FVector& Location, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(const FVector& AimDirection)
 {
+	if (!ensure(Barrel && Turret))
+	{
+		return;
+	}
+
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimRotator - BarrelRotator;

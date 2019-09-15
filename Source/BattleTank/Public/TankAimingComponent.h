@@ -25,14 +25,15 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 public:
 	// Custom Methods
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
 	void AimAt(const FVector& Location, float LaunchSpeed);
 
 protected:
 	// UPROPERTIES
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Aiming;
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:	
 	// Fields 

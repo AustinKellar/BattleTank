@@ -10,16 +10,7 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	ControlledTank = GetControlledTank();
-	if (ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController has posessed %s"), *ControlledTank->GetName());
-	}
-
 	PlayerTank = GetPlayerTank();
-	if (PlayerTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController has found Player Tank: %s"), *PlayerTank->GetName());
-	}
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -32,32 +23,17 @@ void ATankAIController::Tick(float DeltaTime)
 
 ATank* ATankAIController::GetControlledTank()
 {
-	ATank* Tank = Cast<ATank>(GetPawn());
-	
-	if (!Tank)
-	{
-		UE_LOG(LogTemp, Error, TEXT("TankAIController did not posess a tank!"));
-	}
-
-	return Tank;
+	return Cast<ATank>(GetPawn());
 }
 
 ATank* ATankAIController::GetPlayerTank()
 {
-
-	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-
-	if (!PlayerTank)
-	{
-		UE_LOG(LogTemp, Error, TEXT("TankAIController could not find Player tank!"));
-	}
-
-	return PlayerTank;
+	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 void ATankAIController::AimAtPlayer()
 {
-	if (!PlayerTank || !ControlledTank)
+	if (!ensure(PlayerTank && ControlledTank))
 	{
 		return;
 	}
@@ -67,7 +43,7 @@ void ATankAIController::AimAtPlayer()
 
 void ATankAIController::MoveTowardsPlayer()
 {
-	if (!PlayerTank || !ControlledTank)
+	if (!ensure(PlayerTank && ControlledTank))
 	{
 		return;
 	}
