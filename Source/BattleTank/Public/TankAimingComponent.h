@@ -36,7 +36,7 @@ public:
 protected:
 	// UPROPERTIES
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Aiming;
+	EFiringState FiringState = EFiringState::Reloading;
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -56,6 +56,7 @@ private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	float LastFireTime = 0.0f;
+	FVector AimDirection;
 
 	// Engine Methods
 	UTankAimingComponent();
@@ -64,4 +65,5 @@ private:
 
 	// Custom Methods
 	void MoveBarrelTowards(const FVector& AimDirection);
+	bool IsBarrelMoving();
 };
