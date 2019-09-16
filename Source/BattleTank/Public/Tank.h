@@ -48,6 +48,7 @@ private:
 
 	// Engine Methods
 	ATank();
+	virtual void BeginPlay() override;
 
 	// Custom Methods
 };

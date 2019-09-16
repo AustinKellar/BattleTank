@@ -13,6 +13,13 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+	Barrel = FindComponentByClass<UTankBarrel>();
+}
+
 void ATank::Fire()
 {
 	bool bReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
