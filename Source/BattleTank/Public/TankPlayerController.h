@@ -31,14 +31,12 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
-	// Fields
-	UTankAimingComponent* AimingComponent = nullptr;
-
 	// Engine Methods
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	// Custom Methods
+	UTankAimingComponent* GetAimingComponent();
 	void AimTowardsCrosshair();
 	bool GetCrossHairRayHitLocation(FVector& OutHitLocation) const; // returns true if hits terrain
 	bool GetLookDirectionHitLocation(const FVector& LookDirection, FVector& OutHitLocation) const;

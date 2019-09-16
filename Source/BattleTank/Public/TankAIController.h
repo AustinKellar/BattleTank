@@ -18,8 +18,6 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 private:
 	// Fields
-	APawn* PlayerTank = nullptr;
-	UTankAimingComponent* AimingComponent;
 	float AcceptanceRadius = 3000;
 
 	// Engine Methods
@@ -28,6 +26,8 @@ private:
 
 	// Custom Methods
 	APawn* GetPlayerTank();
+	UTankAimingComponent* GetAimingComponent();
 	void AimAtPlayer();
 	void MoveTowardsPlayer();
+	void FireAtPlayer();
 };

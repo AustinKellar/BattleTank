@@ -9,8 +9,6 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerTank = GetPlayerTank();
-	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -18,7 +16,12 @@ void ATankAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	AimAtPlayer();
 	MoveTowardsPlayer();
-	AimingComponent->Fire();
+	FireAtPlayer();
+}
+
+UTankAimingComponent* ATankAIController::GetAimingComponent()
+{
+	return GetPawn()->FindComponentByClass<UTankAimingComponent>();;
 }
 
 APawn* ATankAIController::GetPlayerTank()
@@ -28,6 +31,9 @@ APawn* ATankAIController::GetPlayerTank()
 
 void ATankAIController::AimAtPlayer()
 {
+	APawn* PlayerTank = GetPlayerTank();
+	UTankAimingComponent* AimingComponent = GetAimingComponent();
+
 	if (!ensure(PlayerTank && AimingComponent))
 	{
 		return;
@@ -38,9 +44,20 @@ void ATankAIController::AimAtPlayer()
 
 void ATankAIController::MoveTowardsPlayer()
 {
+	APawn* PlayerTank = GetPlayerTank();
 	if (!ensure(PlayerTank))
 	{
 		return;
 	}
 	MoveToActor(PlayerTank, AcceptanceRadius);
+}
+
+void ATankAIController::FireAtPlayer()
+{
+	UTankAimingComponent* AimingComponent = GetAimingComponent();
+	if (!ensure(AimingComponent))
+	{
+		return;
+	}
+	AimingComponent->Fire();
 }

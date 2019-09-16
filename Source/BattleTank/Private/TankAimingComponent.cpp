@@ -36,7 +36,7 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 void UTankAimingComponent::Fire()
 {
 	bool bReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
-	if (!ensure(Barrel) || !bReloaded)
+	if (!ensure(Barrel && ProjectileBlueprint) || !bReloaded)
 	{
 		return;
 	}
