@@ -2,8 +2,6 @@
 
 #include "Tank.h"
 #include "Engine/World.h"
-#include "TankBarrel.h"
-#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -15,21 +13,5 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	Barrel = FindComponentByClass<UTankBarrel>();
 }
 
-void ATank::Fire()
-{
-	bool bReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTime;
-	if (!ensure(Barrel) || !bReloaded)
-	{
-		return;
-	}
-
-	LastFireTime = FPlatformTime::Seconds();
-
-	AProjectile* NewProjectile = 
-		GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
-
-	NewProjectile->LaunchProjectile(LaunchSpeed);
-}
