@@ -6,7 +6,6 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
@@ -22,13 +21,6 @@ public:
 	// Blueprint Callable Methods
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
-
-	// Custom Methods	
-	void AimAt(const FVector& Location);
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:	
 
@@ -49,6 +41,4 @@ private:
 	// Engine Methods
 	ATank();
 	virtual void BeginPlay() override;
-
-	// Custom Methods
 };

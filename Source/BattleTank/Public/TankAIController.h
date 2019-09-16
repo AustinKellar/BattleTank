@@ -7,6 +7,7 @@
 #include "TankAIController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 /**
  * 
@@ -18,8 +19,9 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 private:
 	// Fields
-	ATank* ControlledTank;
-	ATank* PlayerTank;
+	ATank* ControlledTank = nullptr;
+	ATank* PlayerTank = nullptr;
+	UTankAimingComponent* AimingComponent;
 	float AcceptanceRadius = 3000;
 
 	// Engine Methods

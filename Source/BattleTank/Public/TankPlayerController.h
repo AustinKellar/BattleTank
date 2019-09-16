@@ -37,7 +37,8 @@ private:
 	float LineTraceRange = 1000000;
 
 	// Fields
-	ATank* ControlledTank;
+	ATank* ControlledTank = nullptr;
+	UTankAimingComponent* AimingComponent = nullptr;
 
 	// Engine Methods
 	virtual void BeginPlay() override;

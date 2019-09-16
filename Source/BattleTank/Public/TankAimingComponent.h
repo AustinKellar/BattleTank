@@ -25,7 +25,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 public:
 	// Custom Methods
-	void AimAt(const FVector& Location, float LaunchSpeed);
+	void AimAt(const FVector& Location);
 
 protected:
 	// UPROPERTIES
@@ -36,6 +36,10 @@ protected:
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:	
+	// UPROPERTY
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000;
+
 	// Fields 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;

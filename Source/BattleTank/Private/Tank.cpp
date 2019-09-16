@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
@@ -16,7 +15,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 	Barrel = FindComponentByClass<UTankBarrel>();
 }
 
@@ -34,14 +32,4 @@ void ATank::Fire()
 		GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 
 	NewProjectile->LaunchProjectile(LaunchSpeed);
-}
-
-void ATank::AimAt(const FVector& Location)
-{
-	if (!ensure(TankAimingComponent))
-	{
-		return;
-	}
-
-	TankAimingComponent->AimAt(Location, LaunchSpeed);
 }
