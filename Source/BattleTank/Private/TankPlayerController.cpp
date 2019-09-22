@@ -44,7 +44,6 @@ void ATankPlayerController::AimTowardsCrosshair()
 	}
 
 	FVector HitLocation;
-	UE_LOG(LogTemp, Warning, TEXT("%i"), GetCrossHairRayHitLocation(HitLocation));
 	if (GetCrossHairRayHitLocation(HitLocation))
 	{
 		AimingComponent->AimAt(HitLocation);
