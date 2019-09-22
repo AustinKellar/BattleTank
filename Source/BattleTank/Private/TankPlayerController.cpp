@@ -27,6 +27,11 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 UTankAimingComponent* ATankPlayerController::GetAimingComponent()
 {
+	if (!GetPawn())
+	{
+		return nullptr;
+	}
+
 	return GetPawn()->FindComponentByClass<UTankAimingComponent>();
 }
 

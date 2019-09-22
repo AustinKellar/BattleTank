@@ -19,7 +19,15 @@ public:
 	void SetThrottle(float Throttle);
 
 private:
+	// Fields
 	// Max track force in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = "Driving")
 	float MaxDrivingForce = 25000000; // Assume 40 ton tank and 1g acceleration
+
+	// Engine Methods
+	UTankTrack();
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	// Custom Methods
+	void PreventSlippage(float DeltaTime);
 };
