@@ -44,6 +44,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	}
 
 	FVector HitLocation;
+	UE_LOG(LogTemp, Warning, TEXT("%i"), GetCrossHairRayHitLocation(HitLocation));
 	if (GetCrossHairRayHitLocation(HitLocation))
 	{
 		AimingComponent->AimAt(HitLocation);
@@ -55,7 +56,12 @@ void ATankPlayerController::AimTowardsCrosshair()
 bool ATankPlayerController::GetCrossHairRayHitLocation(FVector& OutHitLocation) const
 {
 	FVector CrossHairLookDirection;
-	GetCrossHairLookDirection(CrossHairLookDirection);
+	bool bFoundLookDirection = GetCrossHairLookDirection(CrossHairLookDirection);
+	if (!bFoundLookDirection)
+	{
+		return false;
+	}
+
 	bool HitLocationIsOnTerrain = GetLookDirectionHitLocation(CrossHairLookDirection, OutHitLocation);
 	return HitLocationIsOnTerrain;
 }
@@ -74,13 +80,13 @@ bool ATankPlayerController::GetLookDirectionHitLocation(const FVector& LookDirec
 	return false;
 }
 
-void ATankPlayerController::GetCrossHairLookDirection(FVector& OutLookDirection) const
+bool ATankPlayerController::GetCrossHairLookDirection(FVector& OutLookDirection) const
 {
 	FVector2D CrossHairScreenLocation;
 	GetCrossHairScreenLocation(CrossHairScreenLocation);
 
 	FVector _;
-	DeprojectScreenPositionToWorld(CrossHairScreenLocation.X, CrossHairScreenLocation.Y, _, OutLookDirection);
+	return DeprojectScreenPositionToWorld(CrossHairScreenLocation.X, CrossHairScreenLocation.Y, _, OutLookDirection);
 }
 
 

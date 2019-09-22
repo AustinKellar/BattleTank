@@ -40,6 +40,6 @@ private:
 	void AimTowardsCrosshair();
 	bool GetCrossHairRayHitLocation(FVector& OutHitLocation) const; // returns true if hits terrain
 	bool GetLookDirectionHitLocation(const FVector& LookDirection, FVector& OutHitLocation) const;
-	void GetCrossHairLookDirection(FVector& OutLookDirection) const;
+	bool GetCrossHairLookDirection(FVector& OutLookDirection) const;
 	void GetCrossHairScreenLocation(FVector2D& OutScreenLocation) const;
 };
