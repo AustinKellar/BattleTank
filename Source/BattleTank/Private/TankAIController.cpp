@@ -59,5 +59,8 @@ void ATankAIController::FireAtPlayer()
 	{
 		return;
 	}
-	AimingComponent->Fire();
+	if (AimingComponent->GetFiringState() == EFiringState::Locked)
+	{
+		AimingComponent->Fire();
+	}
 }

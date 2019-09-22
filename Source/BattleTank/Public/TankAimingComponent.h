@@ -33,6 +33,8 @@ public:
 	// Custom Methods
 	void AimAt(const FVector& Location);
 
+	EFiringState GetFiringState() const;
+
 protected:
 	// UPROPERTIES
 	UPROPERTY(BlueprintReadOnly, Category = "State")
