@@ -27,13 +27,18 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* LaunchBlast = nullptr;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	// Fields
+	UProjectileMovementComponent* ProjectileMovement = nullptr;
+
 	// Engine Methods
 	AProjectile();
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
 
 	// Custom Methods
-
-	UProjectileMovementComponent* ProjectileMovement;
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 };
