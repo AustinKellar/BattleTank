@@ -58,12 +58,14 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 Ammo = 3;
+
 	// Fields 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	float LastFireTime = 0.0f;
 	FVector AimDirection;
-	int32 Ammo = 3;
 
 	// Engine Methods
 	UTankAimingComponent();
