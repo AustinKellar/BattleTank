@@ -7,6 +7,8 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 
 AProjectile::AProjectile()
 {
@@ -51,9 +53,11 @@ void AProjectile::LaunchProjectile(float LaunchSpeed)
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
+	UGameplayStatics::ApplyRadialDamage(this, ProjectileDamage, GetActorLocation(), ExplosionForce->Radius, UDamageType::StaticClass(), TArray<AActor*>());
 	ImpactBlast->Activate();
 	LaunchBlast->Deactivate();
 	ExplosionForce->FireImpulse();
+	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyTimeDelay, false);

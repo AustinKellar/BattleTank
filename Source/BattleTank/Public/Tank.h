@@ -11,7 +11,16 @@ class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 
+public:
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 private:	
+	//UPROPERTIES
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+	int32 MaxHitPoints = 100;
+
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+	int32 HitPoints;
 
 	// Engine Methods
 	ATank();
