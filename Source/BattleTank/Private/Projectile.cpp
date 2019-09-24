@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Engine/World.h"
 
 AProjectile::AProjectile()
 {
@@ -50,9 +51,16 @@ void AProjectile::LaunchProjectile(float LaunchSpeed)
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hit!"));
 	ImpactBlast->Activate();
 	LaunchBlast->Deactivate();
 	ExplosionForce->FireImpulse();
+	CollisionMesh->DestroyComponent();
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyTimeDelay, false);
+}
+
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
 }
 
